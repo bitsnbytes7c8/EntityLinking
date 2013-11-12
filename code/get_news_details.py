@@ -41,7 +41,12 @@ def main():
 							if further.tag == titleFormat and further.text is not None:
 								title = further.text.encode('utf-8');
 							if further.tag == linkFormat and further.text is not None:
-								url = further.text.encode('utf-8');
+								url = further.text;
+							elif further.tag == linkFormat:
+								try:
+									url = further.attrib['href'];
+								except:
+									flag=0; #Do nothing;
 							if further.tag == pdateFormat and further.text is not None:
 								timestamp = further.text.encode('utf-8');
 							if further.tag == authorFormat:
