@@ -6,8 +6,8 @@ import traceback
 
 def main():
 	i = 20120601;
-	outTitle = open("../output/newsTitles2.txt", "w");
-	outDetails = open("../output/newsDeatils2.txt", "w");
+	outTitle = open("../output/newsTitles.txt", "w");
+	outDetails = open("../output/newsDeatils.txt", "w");
 	nerInp = open("../output/nerInput.txt", "w");
 	while i <= 20120615:
 		print i;
@@ -69,11 +69,11 @@ def main():
 						timestamp = timestamp.replace("\n", " ");
 						timestamp = timestamp.replace("\t", " ");
 						timestamp = timestamp.strip(" ");
-						newTitle = title +"\n";
+						newTitle = title;
 						if title[-1:] != '?' and title[-1:] != '.' and title[-1:] != '.':
 							title = title + " .";
 						outTitle.write(title+"\n");
-						outDetails.write(str(i)+"/"+f+"\t"+title+"\t"+author+"\t"+url+"\t"+timestamp+"\n");
+						outDetails.write(str(i)+"/"+f+"\t"+newTitle+"\t"+author+"\t"+url+"\t"+timestamp+"\n");
 					for tags in page:	
 						title = "nil";
 						timestamp = "nil";
@@ -106,11 +106,11 @@ def main():
 							timestamp = timestamp.replace("\n", " ");
 							timestamp = timestamp.replace("\t", " ");
 							timestamp = timestamp.strip(" ");
-							newTitle = title+".\n";
+							newTitle = title;
 							if title[-1:] != '?' and title[-1:] != '!' and title[-1:] != '.':
 								title = title + " .";
 							outTitle.write(title+"\n");
-							outDetails.write(str(i)+"/"+f+"\t"+title+"\t"+author+"\t"+url+"\t"+timestamp+"\n");
+							outDetails.write(str(i)+"/"+f+"\t"+newTitle+"\t"+author+"\t"+url+"\t"+timestamp+"\n");
 			except:
 				print str(i)+"/"+f;
 				#traceback.print_exc(file=sys.stdout);
