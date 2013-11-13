@@ -6,8 +6,9 @@ import traceback
 
 def main():
 	i = 20120601;
-	outTitle = open("../output/newsTitles.txt", "w");
-	outDetails = open("../output/newsDeatils.txt", "w");
+	outTitle = open("../output/newsTitles2.txt", "w");
+	outDetails = open("../output/newsDeatils2.txt", "w");
+	nerInp = open("../output/nerInput.txt", "w");
 	while i <= 20120615:
 		print i;
 		files = os.listdir("../news/"+str(i));
@@ -55,12 +56,22 @@ def main():
 										author = ft.text.encode('utf-8');
 						title = title.replace("\n", " ");
 						title = title.replace("\t", " ");
+						title = title.replace(".", "");
+						title = title.replace("?", "");
+						title = title.replace("!", "");
+						title = title.strip(" ");
 						author = author.replace("\n", " ");
 						author = author.replace("\t", " ");
+						author = author.strip(" ");
 						url = url.replace("\n", " ");
 						url = url.replace("\t", " ");
+						url = url.strip(" ");
 						timestamp = timestamp.replace("\n", " ");
 						timestamp = timestamp.replace("\t", " ");
+						timestamp = timestamp.strip(" ");
+						newTitle = title +"\n";
+						if title[-1:] != '?' and title[-1:] != '.' and title[-1:] != '.':
+							title = title + " .";
 						outTitle.write(title+"\n");
 						outDetails.write(str(i)+"/"+f+"\t"+title+"\t"+author+"\t"+url+"\t"+timestamp+"\n");
 					for tags in page:	
@@ -82,12 +93,22 @@ def main():
 											author = ft.text.encode('utf-8');
 							title = title.replace("\n", " ");
 							title = title.replace("\t", " ");
+							title = title.strip(" ");
+							title = title.replace(".", "");
+							title = title.replace("!", "");
+							title = title.replace("?", "");
 							author = author.replace("\n", " ");
 							author = author.replace("\t", " ");
+							author = author.strip(" ");
 							url = url.replace("\n", " ");
 							url = url.replace("\t", " ");
+							url = url.strip(" ");
 							timestamp = timestamp.replace("\n", " ");
 							timestamp = timestamp.replace("\t", " ");
+							timestamp = timestamp.strip(" ");
+							newTitle = title+".\n";
+							if title[-1:] != '?' and title[-1:] != '!' and title[-1:] != '.':
+								title = title + " .";
 							outTitle.write(title+"\n");
 							outDetails.write(str(i)+"/"+f+"\t"+title+"\t"+author+"\t"+url+"\t"+timestamp+"\n");
 			except:
